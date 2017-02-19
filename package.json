@@ -1,0 +1,43 @@
+{
+  "name": "mirroz",
+  "version": "0.1.0",
+  "description": "UI Components for Mirror",
+  "scripts": {
+    "build": "npm run entry && npm run theme",
+    "prepublish": "gulp generate",
+    "entry": "cross-env NODE_ENV=production webpack",
+    "theme": "gulp theme",
+    "authors": "git log --format='%aN <%aE>' | sort -u | grep -v 'users.noreply.github.com' | grep -v 'gitter.im' | grep -v '.local>' | grep -v 'alibaba-inc.com' | grep -v 'taobao.com' > AUTHORS.txt"
+  },
+  "keywords": [],
+  "author": "ake",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-plugin-import": "^1.1.1",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "cross-env": "^3.1.4",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-copy": "^1.0.0",
+    "gulp-csso": "^2.0.0",
+    "gulp-less": "^3.3.0",
+    "gulp-rename": "^1.2.2",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
+    "postcss-loader": "^1.3.0",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.3"
+  },
+  "dependencies": {
+    "antd": "^2.7.2"
+  }
+}
