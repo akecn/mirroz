@@ -60,15 +60,16 @@ export default ${moduleName};`;
 
 function cloneEntry(list) {
   const entryText = [
-    `import './index.less';`
+`import './index.less';
+import '../node_modules/antd/lib/index';`
   ];
 
-  list.forEach((data) => {
-    const name = data.name;
-    const moduleName = data.moduleName;
-
-    entryText.push(`export {default as ${moduleName}} from './${name}';`);
-  });
+  // list.forEach((data) => {
+  //   const name = data.name;
+  //   const moduleName = data.moduleName;
+  //
+  //   entryText.push(`export {default as ${moduleName}} from './${name}';`);
+  // });
 
   fs.writeFileSync('src/index.js', entryText.join('\n'));
 }

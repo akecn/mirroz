@@ -17,12 +17,15 @@ babelConfig.plugins = [
   }]
 ];
 
-gulp.task('clean', () => {
+gulp.task('clean:lib', () => {
   execSync('rm -rf lib');
+});
+gulp.task('clean:build', () => {
+  execSync('rm -rf build');
 });
 
 gulp.task('babel', () => {
-  return gulp.src('src/*/index.js')
+  return gulp.src('src/**/index.js')
     .pipe(babel(babelConfig))
     .pipe(gulp.dest('lib'));
 });
@@ -59,4 +62,4 @@ theme.forEach(item => {
 
 gulp.task('theme', theme.map(it => `theme:${it.name}`));
 
-gulp.task('generate', ['clean', 'babel', 'less']);
+gulp.task('generate', ['clean:lib', 'babel', 'less']);
