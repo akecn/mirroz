@@ -1,1 +1,1 @@
-import './index.less';
+import '../../../node_modules/antd/lib/collapse/style/index.js';

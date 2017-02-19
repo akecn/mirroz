@@ -1,0 +1,1 @@
+import '../../../node_modules/antd/lib/col/style/index.js';

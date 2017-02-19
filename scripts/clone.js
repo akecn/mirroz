@@ -50,13 +50,14 @@ export default ${moduleName};`;
   fs.writeFileSync(`${path}/index.js`, scriptText);
 
   const lessTargetPath = `node_modules/antd/lib/${name}/style/index.less`;
-
-  if(fs.existsSync(lessTargetPath)) {
+  const existsLessFile = fs.existsSync(lessTargetPath);
+  mkdirp.sync(`${path}/style`);
+  if(existsLessFile) {
     const lessText = `@import '../../../${lessTargetPath}';`;
-    mkdirp.sync(`${path}/style`);
     fs.writeFileSync(`${path}/style/index.less`, lessText);
-    fs.writeFileSync(`${path}/style/index.js`, `import './index.less';`);
   }
+  // 构建 style/index.js ，用于支持 babel-plugin-import 的配置。
+  fs.writeFileSync(`${path}/style/index.js`, `import '../../../node_modules/antd/lib/${name}/style/index.js';`);
 }
 
 function cloneEntry(list) {

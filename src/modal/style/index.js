@@ -1,1 +1,1 @@
-import './index.less';
+import '../../../node_modules/antd/lib/modal/style/index.js';
