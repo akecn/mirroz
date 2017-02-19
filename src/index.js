@@ -1,3 +1,2 @@
-import './index.less';
-
-import '../node_modules/antd/lib/index';
+import antd from '../node_modules/antd/lib/index';
+export default antd;

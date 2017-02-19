@@ -24,6 +24,8 @@ gulp.task('clean:build', () => {
   execSync('rm -rf build');
 });
 
+gulp.task('clean', ['clean:lib', 'clean:build']);
+
 gulp.task('babel', () => {
   return gulp.src('src/**/index.js')
     .pipe(babel(babelConfig))
@@ -44,6 +46,8 @@ gulp.task('less', () => {
 const theme = fs.readdirSync('./theme/').map(key => {
   return {name: path.basename(key, '.json'), variables: require(`./theme/${key}`)};
 });
+
+theme.unshift({name: 'index', variables: {}})
 
 theme.forEach(item => {
   gulp.task(`theme:${item.name}`, () => {
