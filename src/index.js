@@ -1,2 +1,2 @@
-import antd from '../node_modules/antd/lib/index';
-export default antd;
+export * from '../node_modules/antd/lib/index';
+export default '../node_modules/antd/lib/index';

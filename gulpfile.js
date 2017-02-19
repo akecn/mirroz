@@ -33,6 +33,7 @@ gulp.task('babel', () => {
 });
 
 gulp.task('less', () => {
+  // todo generate theme less entries to lib
   return gulp.src('src/*/style/index.less')
     .pipe(gulpCopy('lib', {prefix: 1}))
     .pipe(less({

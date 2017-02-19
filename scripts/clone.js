@@ -55,13 +55,14 @@ export default ${moduleName};`;
     const lessText = `@import '../../../${lessTargetPath}';`;
     mkdirp.sync(`${path}/style`);
     fs.writeFileSync(`${path}/style/index.less`, lessText);
+    fs.writeFileSync(`${path}/style/index.js`, `import './index.less';`);
   }
 }
 
 function cloneEntry(list) {
   const entryText = [
-    `import antd from '../node_modules/antd/lib/index';`,
-    `export default antd`
+    `export * from '../node_modules/antd/lib/index';`,
+    `export default '../node_modules/antd/lib/index';`
   ];
 
   // list.forEach((data) => {
