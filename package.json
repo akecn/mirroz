@@ -7,7 +7,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "npm run clean:build && npm run entry && npm run theme",
+    "build": "npm run clean:build && gulp version && npm run entry && npm run theme",
     "prepublish": "gulp generate",
     "clean:build": "gulp clean:build",
     "entry": "cross-env NODE_ENV=production webpack",
