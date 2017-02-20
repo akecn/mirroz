@@ -1,0 +1,1 @@
+component [Modal](https://ant.design/components/modal) from [Antd](https://ant.design)

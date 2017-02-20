@@ -1,0 +1,1 @@
+component [Tag](https://ant.design/components/tag) from [Antd](https://ant.design)

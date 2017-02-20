@@ -1,0 +1,1 @@
+component [Slider](https://ant.design/components/slider) from [Antd](https://ant.design)

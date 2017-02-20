@@ -1,0 +1,1 @@
+component [Carousel](https://ant.design/components/carousel) from [Antd](https://ant.design)

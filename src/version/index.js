@@ -1,0 +1,1 @@
+export default {version: "0.1.5", antd: "2.7.2"};

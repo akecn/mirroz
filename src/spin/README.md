@@ -1,0 +1,1 @@
+component [Spin](https://ant.design/components/spin) from [Antd](https://ant.design)

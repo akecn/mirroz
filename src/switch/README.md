@@ -1,0 +1,1 @@
+component [Switch](https://ant.design/components/switch) from [Antd](https://ant.design)

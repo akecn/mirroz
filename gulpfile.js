@@ -7,6 +7,7 @@ const gulpCopy = require('gulp-copy');
 const less = require('gulp-less');
 const rename = require("gulp-rename");
 const minifyCSS = require('gulp-csso');
+const mkdirp = require('mkdirp');
 
 const babelrcText = fs.readFileSync(path.resolve(__dirname, './.babelrc'));
 const babelConfig = JSON.parse(babelrcText.toString());
@@ -67,4 +68,11 @@ theme.forEach(item => {
 
 gulp.task('theme', theme.map(it => `theme:${it.name}`));
 
-gulp.task('generate', ['clean:lib', 'babel', 'less']);
+gulp.task('version', () => {
+  const pkg = require('./package.json');
+  const pkgAntd = require('./node_modules/antd/package.json');
+  mkdirp.sync('src/version');
+  fs.writeFileSync(`src/version/index.js`, `export default {version: "${pkg.version}", antd: "${pkgAntd.version}"};`);
+});
+
+gulp.task('generate', ['clean:lib', 'version', 'babel', 'less']);

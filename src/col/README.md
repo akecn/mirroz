@@ -1,0 +1,1 @@
+component [Col](https://ant.design/components/col) from [Antd](https://ant.design)

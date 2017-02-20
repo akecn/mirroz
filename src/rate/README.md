@@ -1,0 +1,1 @@
+component [Rate](https://ant.design/components/rate) from [Antd](https://ant.design)

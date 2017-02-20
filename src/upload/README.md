@@ -1,0 +1,1 @@
+component [Upload](https://ant.design/components/upload) from [Antd](https://ant.design)

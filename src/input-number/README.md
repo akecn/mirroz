@@ -1,0 +1,1 @@
+component [InputNumber](https://ant.design/components/input-number) from [Antd](https://ant.design)

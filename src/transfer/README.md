@@ -1,0 +1,1 @@
+component [Transfer](https://ant.design/components/transfer) from [Antd](https://ant.design)

@@ -1,0 +1,1 @@
+component [Pagination](https://ant.design/components/pagination) from [Antd](https://ant.design)

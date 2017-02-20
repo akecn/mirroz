@@ -1,0 +1,1 @@
+component [LocaleProvider](https://ant.design/components/locale-provider) from [Antd](https://ant.design)

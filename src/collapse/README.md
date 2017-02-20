@@ -1,0 +1,1 @@
+component [Collapse](https://ant.design/components/collapse) from [Antd](https://ant.design)

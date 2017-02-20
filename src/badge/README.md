@@ -1,0 +1,1 @@
+component [Badge](https://ant.design/components/badge) from [Antd](https://ant.design)

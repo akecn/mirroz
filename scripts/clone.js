@@ -1,14 +1,11 @@
 /**
  * 仅用于初始创建 antd 相关的组件库。
  * 用统一的格式来引入 mirroz 包中。
- * 注意：脚本的依赖不列入 package.json
  */
 
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const execSync = require('child_process').execSync;
-
-const mods = getAntdComponentToMods();
 
 function getAntdComponentToMods() {
   const result = [];
@@ -58,6 +55,8 @@ export default ${moduleName};`;
   }
   // 构建 style/index.js ，用于支持 babel-plugin-import 的配置。
   fs.writeFileSync(`${path}/style/index.js`, `import '../../../node_modules/antd/lib/${name}/style/index.js';`);
+
+  fs.writeFileSync(`${path}/README.md`, `component [${moduleName}](https://ant.design/components/${name}) from [Antd](https://ant.design)`);
 }
 
 function cloneEntry(list) {
@@ -73,18 +72,49 @@ function cloneEntry(list) {
   //   entryText.push(`export {default as ${moduleName}} from './${name}';`);
   // });
 
+  entryText.push(`export {default as Version} from './version'`);
+
   fs.writeFileSync('src/index.js', entryText.join('\n'));
 }
 
-function cloneStyle() {
+function cloneComponents() {
+  const mods = getAntdComponentToMods();
+  mods.forEach(cloneNormal);
+
+  cloneEntry(mods);
+}
+
+function cloneStyleEntry() {
   const lessText = `@import '../node_modules/antd/lib/style/index.less';
 @import '../node_modules/antd/lib/style/components.less';`;
 
   fs.writeFileSync('src/index.less', lessText);
 }
 
-execSync('rm -rf src');
+function cloneThemeEntry() {
+  const themes = ['default', 'green', 'blue'];
 
-mods.forEach(cloneNormal);
-cloneStyle();
-cloneEntry(mods);
+  mkdirp.sync('src/style/themes');
+
+  themes.forEach(theme => {
+    const lessText = `
+@import './themes/${theme}.less';
+@import '../../node_modules/antd/lib/style/core/index.less';
+@import '../../node_modules/antd/lib/style/components.less';
+`;
+
+    fs.writeFileSync(`src/style/themes/${theme}.less`, '');
+    fs.writeFileSync(`src/style/${theme}.less`, lessText);
+  });
+}
+
+// clean all src files
+// execSync('rm -rf src');
+
+// create component base antd
+cloneComponents();
+// create style entry
+cloneStyleEntry();
+
+// create theme dir
+// cloneThemeEntry();
