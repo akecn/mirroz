@@ -6,8 +6,6 @@ import {getPlugins} from './scripts/utils';
 
 const env = process.env.NODE_ENV || 'production';
 
-const theme = JSON.stringify({});
-
 export default {
   noInfo: true,
   devtool: 'cheap-module-source-map',
@@ -22,7 +20,7 @@ export default {
   module: {
     loaders: [
       { test: /\.js$/, exclude: /node_modules/, loader: "babel" },
-      {test: /(\.css|\.less)$/, loader: ExtractTextPlugin.extract(`css!postcss!less?{"modifyVars":${theme}}`)}
+      {test: /(\.css|\.less)$/, loader: ExtractTextPlugin.extract(`css!postcss!less`)}
     ]
   },
   postcss: function () {

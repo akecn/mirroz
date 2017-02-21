@@ -10,7 +10,7 @@ const execSync = require('child_process').execSync;
 function getAntdComponentToMods() {
   const result = [];
   const prefixPath = `./node_modules/antd/lib/`;
-  const exclude = ['_util', 'style', 'version'];
+  const exclude = ['_util', 'style'];
 
   fs.readdirSync(prefixPath).forEach(name => {
     const stat = fs.statSync(prefixPath + name);
@@ -61,18 +61,30 @@ export default ${moduleName};`;
 
 function cloneEntry(list) {
   const entryText = [
-    `export * from '../node_modules/antd/lib/index';`,
-    `export default '../node_modules/antd/lib/index';`
+`
+/* eslint no-console:0 */
+// this file is not used if use https://github.com/ant-design/babel-plugin-import
+if (process.env.NODE_ENV !== 'production') {
+  if (typeof console !== 'undefined' && console.warn && typeof window !== 'undefined') {
+    console.warn('You are using a whole package of mirroz,\nplease use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size.');
+  }
+}
+`
   ];
 
-  // list.forEach((data) => {
-  //   const name = data.name;
-  //   const moduleName = data.moduleName;
-  //
-  //   entryText.push(`export {default as ${moduleName}} from './${name}';`);
-  // });
+  //entryText.push(
+  //  `export * from '../node_modules/antd/lib/index';`,
+  //  `export default '../node_modules/antd/lib/index';`,
+  //  `export {default as Version} from './version'`
+  //);
 
-  entryText.push(`export {default as Version} from './version'`);
+  list.forEach((data) => {
+    const name = data.name;
+    const moduleName = data.moduleName;
+
+    entryText.push(`export {default as ${moduleName}} from './${name}';`);
+  });
+
 
   fs.writeFileSync('src/index.js', entryText.join('\n'));
 }
@@ -94,6 +106,8 @@ function cloneStyleEntry() {
 function cloneThemeEntry() {
   const themes = ['default', 'green', 'blue'];
 
+  const variables = fs.readFileSync('./node_modules/antd/lib/style/themes/default.less').toString();
+
   mkdirp.sync('src/style/themes');
 
   themes.forEach(theme => {
@@ -103,7 +117,9 @@ function cloneThemeEntry() {
 @import '../../node_modules/antd/lib/style/components.less';
 `;
 
-    fs.writeFileSync(`src/style/themes/${theme}.less`, '');
+    fs.writeFileSync(`src/style/themes/${theme}.less`,
+      variables.replace('@import "../color/colors";', '@import "../../../node_modules/antd/lib/style/color/colors.less";')
+    );
     fs.writeFileSync(`src/style/${theme}.less`, lessText);
   });
 }
@@ -117,4 +133,4 @@ cloneComponents();
 cloneStyleEntry();
 
 // create theme dir
-// cloneThemeEntry();
+cloneThemeEntry();

@@ -45,8 +45,13 @@ gulp.task('less', () => {
     .pipe(gulp.dest('lib'));
 });
 
-const theme = fs.readdirSync('./theme/').map(key => {
-  return {name: path.basename(key, '.json'), variables: require(`./theme/${key}`)};
+//gulp.task('style', () => {
+//  return gulp.src('src/style/**/*.less')
+//    .pipe(gulp.dest('lib/style'));
+//});
+
+const theme = fs.readdirSync('./themes/').map(key => {
+  return {name: path.basename(key, '.json'), variables: require(`./themes/${key}`)};
 });
 
 theme.unshift({name: 'index', variables: {}})
@@ -68,10 +73,21 @@ theme.forEach(item => {
 
 gulp.task('theme', theme.map(it => `theme:${it.name}`));
 
+//gulp.task('theme', () => {
+//  return gulp.src('src/style/*.less')
+//    .pipe(less({
+//      paths: [
+//        path.join(__dirname, 'src/style/themes'),
+//        path.join(__dirname, 'node_modules/antd')
+//      ]
+//    }))
+//    //.pipe(minifyCSS())
+//    .pipe(gulp.dest('build'));
+//});
+
 gulp.task('version', () => {
   const pkg = require('./package.json');
   const pkgAntd = require('./node_modules/antd/package.json');
-  mkdirp.sync('src/version');
   fs.writeFileSync(`src/version/index.js`, `export default {version: "${pkg.version}", antd: "${pkgAntd.version}"};`);
 });
 
